@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedback Sentence Stems</title>
+<meta name="description" content="Kickstart meaningful feedback with the Feedback Starter Tool. Designed to help teachers provide clear, constructive, and encouraging comments that boost student growth." />
+<meta name="keywords" content="feedback starter tool, teacher feedback, student feedback, constructive feedback, teaching resources, classroom communication, student growth, education tools, feedback ideas, teacher support" />
+
+  <style>
+    body {
+      font-family: Roboto, sans-serif;
+ 	background-color: #f9f9f9;
+  	color: #333;
+      margin: auto;
+      max-width: 500px;
+    }
+    select {
+      padding: 10px;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+    .stem {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+    }
+    .stem-text {
+      flex: 1;
+    }
+  .copy-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .copy-btn:hover {
+background-color: #0056b3 !important; /* darker blue on hover */
+    }
+    .copied-msg {
+      color: green;
+      font-size: 14px;
+      display: none;
+      margin-left: 10px;
+    }
+#credit {
+  background-color: #f9f9f9;
+  padding: 10px 20px;
+  text-align: center;
+  font-family: Roboto, sans-serif;
+  font-size: 0.9rem;
+  color: #555;
+  border-top: 1px solid #ddd;
+}
+
+#credit p {
+  margin: 0;
+}
+
+#credit p:last-child {
+  margin-top: 12px;  /* Space above Follow me */
+}
+
+#credit a {
+  background-color: #0077b6;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.7);
+}
+
+#credit a:hover,
+#credit a:focus {
+  background-color: #005f86;
+  color: white;
+  animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+  </style>
+</head>
+<body>
+  <h1>Feedback Sentence Stem Tool</h1>
+
+  <label for="category">Choose a category:</label>
+  <select id="category">
+    <option value="">-- Select a category --</option>
+    <option value="positive">Positive Reinforcement</option>
+    <option value="mastery">Skill Mastery</option>
+    <option value="constructive">Constructive Feedback</option>
+    <option value="nextSteps">Growth & Next Steps</option>
+    <option value="encouragement">Encouragement</option>
+    <option value="clarity">Communication & Clarity</option>
+    <option value="collaboration">Collaboration & Habits</option>
+    <option value="creativity">Creativity & Original Thinking</option>
+    <option value="reflection">Self-Reflection</option>
+    <option value="progressReports">Progress Reports</option>
+  </select>
+
+  <div id="stemsContainer"></div>
+
+  <script>
+    const stems = {
+      positive: [
+        "You did a great job on…",
+        "I can tell you worked hard on…",
+        "It’s clear that you’ve improved in…",
+        "You’re really starting to grasp…",
+        "One thing that stood out to me was…",
+        "I appreciate the detail you included in…",
+        "Your effort here shows in the way you…",
+        "This part shows real growth from your last assignment.",
+        "You're developing stronger skills in...",
+        "Keep up the good work on..."
+      ],
+      mastery: [
+        "You demonstrated a strong understanding of…",
+        "You accurately applied the concept of…",
+        "Your explanation of ___ was spot on.",
+        "The way you solved ___ shows a clear understanding of…",
+        "I noticed that you used ___ correctly, which is great.",
+        "You’re on the right track with how you handled…",
+        "This part shows that you’ve mastered…",
+        "You applied ___ in a way that made your thinking clear."
+      ],
+      constructive: [
+        "One thing to work on is…",
+        "You might want to review how to…",
+        "It seems like you misunderstood…",
+        "A common mistake is ___, and I see it here in…",
+        "Let’s take another look at how you approached…",
+        "To strengthen this part, try…",
+        "Think about whether ___ makes sense in this context.",
+        "Consider revisiting the concept of…",
+        "You’re almost there, but be careful with…",
+        "This would be even better if you had…"
+      ],
+      nextSteps: [
+        "Next time, try to…",
+        "A good next step would be to…",
+        "You’re ready to move on to…",
+        "Let’s set a goal to…",
+        "One area to focus on next is…",
+        "To improve, start by…",
+        "As you revise, pay special attention to…",
+        "Think about how you can deepen your explanation of…",
+        "You’ve got a solid foundation, now let’s build on it by…",
+        "With some practice on ___, you’ll be even stronger."
+      ],
+      encouragement: [
+        "Don’t give up—this is part of learning.",
+        "You’re getting closer each time.",
+        "I believe you can master this with a little more practice.",
+        "Mistakes help us grow—keep going.",
+        "Every step forward counts.",
+        "Keep pushing yourself—you’re making progress.",
+        "You’ve come a long way!",
+        "I’m proud of the effort you’re putting in."
+      ],
+      clarity: [
+        "Your ideas came across clearly when you…",
+        "I really liked how you explained…",
+        "Try to organize your thoughts more clearly in…",
+        "Consider adding more detail to help the reader understand…",
+        "The way you presented ___ made it easy to follow.",
+        "Think about using more precise language when you…",
+        "It would help if you broke this down into smaller steps.",
+        "This part could be clearer if you explained…",
+        "You made a strong point when you said…"
+      ],
+      collaboration: [
+        "You worked well with your group by…",
+        "I noticed you took the lead in…",
+        "Great job contributing your ideas during…",
+        "Try to stay more engaged during group discussions.",
+        "You supported your classmates by…",
+        "Let’s work on balancing your participation with listening to others.",
+        "You were respectful and open to different perspectives."
+      ],
+      creativity: [
+        "I loved your creative approach to…",
+        "You thought outside the box with…",
+        "This was an original way to look at…",
+        "Your unique perspective really came through in…",
+        "Next time, don’t be afraid to take creative risks again!",
+        "It’s exciting to see you think in new ways about…"
+      ],
+      reflection: [
+        "What do you think was your strongest part?",
+        "How do you feel about your work on this?",
+        "What would you do differently next time?",
+        "I’d love to hear more about how you approached this.",
+        "Take a moment to reflect on what you learned from this.",
+        "What strategy helped you most here?",
+        "Let’s think together about how you could grow from this."
+      ],
+      progressReports: [
+        "[Student] is developing strong skills in…",
+        "I’ve seen growth in…",
+        "[Student] benefits from continued support with…",
+        "I encourage [student] to keep practicing…",
+        "[Student] shows a positive attitude toward learning…"
+      ]
+    };
+
+    const select = document.getElementById('category');
+    const container = document.getElementById('stemsContainer');
+
+    select.addEventListener('change', () => {
+      const category = select.value;
+      container.innerHTML = '';
+
+      if (stems[category]) {
+        stems[category].forEach(sentence => {
+          const div = document.createElement('div');
+          div.className = 'stem';
+
+          const span = document.createElement('span');
+          span.className = 'stem-text';
+          span.textContent = sentence;
+
+const button = document.createElement('button');
+button.textContent = 'Copy';
+button.className = 'copy-btn'; // Uses your blue style
+button.onclick = () => {
+  navigator.clipboard.writeText(q);
+  copiedMsg.style.display = 'inline';
+  setTimeout(() => copiedMsg.style.display = 'none', 1200);
+};
+
+          const copied = document.createElement('span');
+          copied.className = 'copied-msg';
+          copied.textContent = 'Copied!';
+
+          button.addEventListener('click', () => {
+            navigator.clipboard.writeText(sentence).then(() => {
+              copied.style.display = 'inline';
+              setTimeout(() => copied.style.display = 'none', 1500);
+            });
+          });
+
+          div.appendChild(span);
+          div.appendChild(button);
+          div.appendChild(copied);
+          container.appendChild(div);
+        });
+      }
+    });
+  </script>
+<footer id="credit">
+  <p>© 2025 <strong>Jenna Neel</strong> | Made with 💖 by a teacher powered by caffeine and curiosity.</p>
+<p><a href="https://medium.com/@jennaneel" target="_blank" rel="noopener noreferrer">Follow me on Medium</a></p>
+</footer>
+</body>
+</html>
